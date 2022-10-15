@@ -1,14 +1,11 @@
 import React from "react";
 
-function TodoList(){
+function TodoList(props){
   return (
-    <div>
+    <div className="App-ListTodo">
+      <h3>Esa es la lista de items por hacer:</h3>
       <ul>
-        <li>Tarea 1</li>
-        <li>Tarea 2</li>
-        <li>Tarea 3</li>
-        <li>Tarea 4</li>
-        <li>Tarea 5</li>
+        {props.children}
       </ul>
     </div>
   );
