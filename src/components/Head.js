@@ -1,13 +1,10 @@
 import React from "react";
 
-function nombre() {
-  return "Brian";
-}
-
-function Head(){
+function Head(props){
   return (
     <header>
-      <h1>Bienvenido {nombre()} a mi app</h1>
+      <h1>Bienvenido</h1>
+      <h3>Has completado {props.completedTodos} de {props.totalTodos}</h3>
     </header>
   );
 }
