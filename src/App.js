@@ -8,7 +8,7 @@ function App() {
     <TodoProvider>
         <AppUI/>
     </TodoProvider>    
-  )  
+  );
 }
 
 export default App;

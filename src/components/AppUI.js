@@ -8,25 +8,32 @@ import { TodoItem } from './TodoItem';
 
 function AppUI(){
 
-  const {searchValue, 
-    setSearchValue,
+  const {
+    // Estos no los estaba usando, así que los comento.
+    // searchValue, 
+    // setSearchValue,
+    loading,
     totalTodos,
     completedTodos,
-    searchedTodos,} = React.useContext(TodoContext);
+    searchedTodos,
+    completeTodo} = React.useContext(TodoContext);
 
     return (
       <React.Fragment>
         <Head 
           totalTodos={totalTodos}
-          completedTodos={completedTodos}/>
+          completedTodos={completedTodos}
+          />
         <TodoSearch/>
         <TodoList>
+          {loading && <p>Cargando...</p>}
           {
             searchedTodos.map(todo => (
               <TodoItem
               key={todo.text}
               text={todo.text}
               completed={todo.completed}
+              onComplete={() => completeTodo(todo.text)}
               />
               ))
             }
@@ -34,7 +41,6 @@ function AppUI(){
         <Footer/>
       </React.Fragment>
     );
-
 }
 
 export {AppUI};

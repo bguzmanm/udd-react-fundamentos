@@ -1,44 +1,77 @@
 import React from "react";
+import { useLocalStorage } from "./useLocalStorage";
 
 const TodoContext = React.createContext();
 
 
-function TodoProvider(props){
-  
+function TodoProvider(props) {
+
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading, //acá incluír el loading
+  } = useLocalStorage('TODOS_V1',
+    [ // Puedes descomentar estas lineas para generar el arreglo en el localStorage 
+      // {text: 'Limpiar Baño', completed: false},
+      // {text: 'Lavar la loza', completed: false},
+      // {text: 'Preparar almuerzo', completed: true},
+      // {text: 'Ordenar living', completed: false},
+    ]);
+
+    
+
   const [searchValue, setSearchValue] = React.useState('');
-  
-  const defaulTodos = [
-    {text: 'Limpiar Baño', completed: false},
-    {text: 'Lavar la loza', completed: false},
-    {text: 'Preparar almuerzo', completed: false},
-    {text: 'Ordenar living', completed: false},
-  ];
+  const completedTodos = todos.filter(todo => !!todo.completed).length;
+  const totalTodos = todos.length;
 
-  let searchedTodos = defaulTodos;
+  let searchedTodos = todos;
 
-  const totalTodos = defaulTodos.length;
-  const completedTodos = defaulTodos
-    .filter(todo => !!todo.completed).length;
-
-  if (searchValue.length > 0){
-    searchedTodos = defaulTodos.filter(todo => {
+  if (searchValue.length > 0) {
+    searchedTodos = todos.filter(todo => {
       const todoText = todo.text.toLowerCase();
       const searchText = searchValue.toLowerCase();
       return todoText.includes(searchText);
     });
   }
-  
+
+  // FIX: acá tenía asignaciones incorrectas.
+  const completeTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos];
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+    saveTodos(newTodos);
+  }
+
+  const addTodo = (text) => {
+    const newTodos = [...todos];
+    newTodos.push({ text: text, completed: false });
+    saveTodos(newTodos);
+  }
+
+  // agregé esta función para borrar un todo
+  const deleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos];
+    newTodos.slice(todoIndex, 1);
+    saveTodos(newTodos);
+  }
+
+
   return (
     <TodoContext.Provider value={{
-      searchValue, 
+      loading, //y acá tambi´n
+      searchValue,
       setSearchValue,
+      searchedTodos,
       totalTodos,
       completedTodos,
-      searchedTodos,
+      completeTodo,
+      addTodo,
+      deleteTodo,
     }}>
       {props.children}
     </TodoContext.Provider>
   )
 }
 
-export {TodoContext, TodoProvider }
+export { TodoContext, TodoProvider }
