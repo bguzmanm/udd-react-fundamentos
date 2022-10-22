@@ -1,10 +1,14 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+
 import { TodoContext } from './TodoContext';
 import { Head } from './Head';
 import { Footer } from './Footer';
-import { TodoList } from './TodoList';
-import { TodoSearch } from './TodoSearch';
-import { TodoItem } from './TodoItem';
+
+import { Layout } from './Layout';
+import { About } from './About';
+import { Home } from './Home';
+import { Uf } from './Uf';
 
 function AppUI(){
 
@@ -12,11 +16,12 @@ function AppUI(){
     // Estos no los estaba usando, así que los comento.
     // searchValue, 
     // setSearchValue,
-    loading,
+    // loading,
+    // searchedTodos,
+    //  completeTodo
     totalTodos,
     completedTodos,
-    searchedTodos,
-    completeTodo} = React.useContext(TodoContext);
+  } = React.useContext(TodoContext);
 
     return (
       <React.Fragment>
@@ -24,20 +29,14 @@ function AppUI(){
           totalTodos={totalTodos}
           completedTodos={completedTodos}
           />
-        <TodoSearch/>
-        <TodoList>
-          {loading && <p>Cargando...</p>}
-          {
-            searchedTodos.map(todo => (
-              <TodoItem
-              key={todo.text}
-              text={todo.text}
-              completed={todo.completed}
-              onComplete={() => completeTodo(todo.text)}
-              />
-              ))
-            }
-        </TodoList>
+          <Routes>
+            <Route path='/' element={<Layout/>}>
+              <Route index element={<Home/>}/>
+              <Route path="about" element={<About/>}/>
+              <Route path="uf" element={<Uf/>}/>
+            </Route>
+          </Routes>
+        
         <Footer/>
       </React.Fragment>
     );
