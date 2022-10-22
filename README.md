@@ -19,3 +19,8 @@ Hice cambios en [useLocalStorage](./src/components/useLocalStorage.js), en [Todo
 
 Busca donde está el comentario **fix** donde está la mayor diferencia.
 
+## Clase del 22 de Octubre
+Agregamos:
+- React-Router.
+- Axios para el consumo de APIS.
+- Recuerda instalar el plugin React Develop Kit
