@@ -3,7 +3,6 @@ import { useLocalStorage } from "./useLocalStorage";
 
 const TodoContext = React.createContext();
 
-
 function TodoProvider(props) {
 
   const {
