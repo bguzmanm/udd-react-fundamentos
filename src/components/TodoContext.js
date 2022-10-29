@@ -10,16 +10,16 @@ function TodoProvider(props) {
     saveItem: saveTodos,
     loading, //acá incluír el loading
   } = useLocalStorage('TODOS_V1',
-    [ // Puedes descomentar estas lineas para generar el arreglo en el localStorage 
-      // {text: 'Limpiar Baño', completed: false},
-      // {text: 'Lavar la loza', completed: false},
-      // {text: 'Preparar almuerzo', completed: true},
-      // {text: 'Ordenar living', completed: false},
+    [
+      //Puedes descomentar estas lineas para generar el arreglo en el localStorage 
+      // { text: 'Limpiar Baño', completed: false },
+      // { text: 'Lavar la loza', completed: false },
+      // { text: 'Preparar almuerzo', completed: true },
+      // { text: 'Ordenar living', completed: false },
     ]);
 
-    
-
   const [searchValue, setSearchValue] = React.useState('');
+  const [openModal, setOpenModal] = React.useState(false);
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
 
@@ -29,6 +29,7 @@ function TodoProvider(props) {
     searchedTodos = todos.filter(todo => {
       const todoText = todo.text.toLowerCase();
       const searchText = searchValue.toLowerCase();
+
       return todoText.includes(searchText);
     });
   }
@@ -55,10 +56,9 @@ function TodoProvider(props) {
     saveTodos(newTodos);
   }
 
-
   return (
     <TodoContext.Provider value={{
-      loading, //y acá tambi´n
+      loading, //y acá también
       searchValue,
       setSearchValue,
       searchedTodos,
@@ -67,6 +67,8 @@ function TodoProvider(props) {
       completeTodo,
       addTodo,
       deleteTodo,
+      openModal,
+      setOpenModal
     }}>
       {props.children}
     </TodoContext.Provider>

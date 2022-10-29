@@ -4,16 +4,21 @@ import { TodoList } from './TodoList';
 import { TodoItem } from './TodoItem';
 import { TodoSearch } from './TodoSearch';
 import { TodoContext } from './TodoContext';
+import { Modal } from './Modal';
+import { TodoForm } from './TodoForm';
+import { CreateTodoButton } from './CreateTodoButton';
 
 
 function Home() {
-  
+
   const {
     loading,
     searchedTodos,
-    completeTodo,    
+    completeTodo,
+    openModal,
+    setOpenModal
   } = React.useContext(TodoContext);
-  
+
   return (
     <div>
       <TodoSearch />
@@ -30,6 +35,15 @@ function Home() {
           ))
         }
       </TodoList>
+      {!!openModal && (
+        <Modal>
+          <TodoForm />
+        </Modal>
+      )}
+      {/* agrego un div con el modal */}
+      <div id='modal'></div>
+      <CreateTodoButton setOpenModal={setOpenModal} />
+
     </div>
   );
 }

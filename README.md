@@ -15,12 +15,22 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ## Como evitar el reload infinito?
-Hice cambios en [useLocalStorage](./src/components/useLocalStorage.js), en [TodoContext](./src/components/TodoContext.js) y en [AppUI](./src/components/AppUI.js). 
+
+Hice cambios en [useLocalStorage](./src/components/useLocalStorage.js), en [TodoContext](./src/components/TodoContext.js) y en [AppUI](./src/components/AppUI.js).
 
 Busca donde está el comentario **fix** donde está la mayor diferencia.
 
 ## Clase del 22 de Octubre
+
 Agregamos:
+
 - React-Router.
 - Axios para el consumo de APIS.
 - Recuerda instalar el plugin React Develop Kit
+
+## Clase del 29 de Octubre
+
+- Conocimos useState, useEffect, useParams
+- Agregamos un modal para agregar tareas a nuestra lista.
+
+**FIX**: Solo necesitabamos agregar un `<div id='modal'>` a [Home.js](./src/components/Home.js) (línea 43).

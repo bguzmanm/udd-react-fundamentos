@@ -1,21 +1,27 @@
 import React from "react";
 import './Layout.css';
-import { Link, Outlet } from "react-router-dom";
-
+import { NavLink, Outlet, useParams } from "react-router-dom";
+import { TodoContext } from './TodoContext';
 function Layout() {
+
+  let parametroId = 20;
+  const {
+    totalTodos,
+  } = React.useContext(TodoContext);
+
   return (
     <div>
       <div>
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <NavLink to='/'>Home</NavLink>
             </li>
             <li>
-              <Link to="/about">Acerca De</Link>
+              <NavLink to={`/about/${parametroId}`}>Acerca De</NavLink>
             </li>
             <li>
-              <Link to="/uf">UF</Link>
+              <NavLink to={`/temp/${totalTodos}`}>Temperatura</NavLink>
             </li>
           </ul>
         </nav>
@@ -23,7 +29,7 @@ function Layout() {
       <div>
         <Outlet />
       </div>
-    </div>
+    </div >
   );
 }
 

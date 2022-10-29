@@ -1,11 +1,15 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 
 function About() {
+
+  let { id } = useParams();
+
   return (
     <div>
-      <h3>Acerca de esta app</h3>
-      <p>Lorem upsulum asdjflkajsd  lkajsdlfj </p>
+      <p>Seleccionaste la opción {id}</p>
+      <h1>Acerca de esta app</h1>
     </div>
   );
 }

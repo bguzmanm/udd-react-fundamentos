@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { Row, Col, Container, Button } from 'react-bootstrap';
+import { useParams } from "react-router-dom";
 
 
 const getWeather = async (url) => {
@@ -17,11 +18,15 @@ getWeather('https://api.open-meteo.com/v1/forecast?latitude=-33.4691&longitude=-
   });
 
 function Uf() {
+
+  let { tot } = useParams();
+
   return (
     <Container>
       <Row>
         <Col xs={6}>
-          <p>La temperatura</p>
+          <p>Total de Tareas por completar: {tot}</p>
+          <h1>La temperatura</h1>
         </Col>
         <Col xs={6}>
           <p>En santiago, a esta hora, hay {temp} celcius.</p>
